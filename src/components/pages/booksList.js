@@ -5,28 +5,52 @@ import { getBooks } from '../../actions/bookActions';
 import { bindActionCreators } from 'redux';
 import { Grid, Col, Row, Button} from 'react-bootstrap';
 
+import BookItem from './bookItem';
+import BooksForm from './booksForm';
+import Cart from './cart';
+
 class BooksList extends React.Component{
     componentDidMount(){
-        //Dispatch an action
-        this.props.getBooks();
-    }
+        this.props.getBooks(
+    [{
+        id: 1,
+        title: 'this is a book title',
+        description: 'this is a book description',
+        price: 77.70
+    },
+    {
+        id: 2,
+        title: 'this is a second book title',
+        description: 'this is a second book description',
+        price: 77.70
+    }]
+
+   ) 
+}
     render(){
         const booksList = this.props.books.map(function(booksArr){
         return(
-            <div key={booksArr.id}>
-                <h2>{booksArr.title}</h2>
-                <h2>{booksArr.description}</h2>
-                <h2>{booksArr.price}</h2>
-                <Button bsStyle='primary'>Buy Now!</Button>
-            </div>
+          <Col xs={12} sm={6} md={4} key={booksArr.id}>
+          <BookItem
+            id= {booksArr.id}
+            title={booksArr.title}
+            description={booksArr.description}
+            price={booksArr.price}/>
+            </Col>
         )
     })
     return(
       <Grid>
-          <Row style={{marginTop:'15px'}}>
+          <Row>
+              <Cart />
+          </Row>
+          <Row>
+            <Col xs={12} sm={6}>
+            <BooksForm />
+            </Col>
               {booksList}
-              </Row>
-          </Grid>
+           </Row>
+        </Grid>
     )
   }
 }

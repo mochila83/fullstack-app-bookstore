@@ -38,6 +38,9 @@ export function booksReducers(state={
     return {books: [...currentBookToDelete.slice(0, indexToDelete),
     ...currentBookToDelete.slice(indexToDelete + 1)]}
     break;
+        case "ADD_TO_CART":
+       return {cart:[...state,...action.payload]}
+        break;
 
     case "UPDATE_BOOK":
     const currentBookToUpdate = [...state.books]
