@@ -7,32 +7,6 @@ import { deleteCartItem, upDateCart } from '../../actions/cartActions';
 
 class Cart extends React.Component{
 
-    onDelete(_id){
-           // Create a copy of the current array of books
-        const currentBookToDelete = this.props.cart;
-        // Determine at which index in books array is the book to be deleted
-        const indexToDelete = currentBookToDelete.findIndex(
-            function(cart){
-                return cart._id === _id;
-            }
-        ) 
-    // use slice to remove the book at the specified index    
-    let cartAfterDelete = [...currentBookToDelete.slice(0, indexToDelete), 
-     ...currentBookToDelete.slice(indexToDelete + 1)]    
-
-        this.props.deleteCartItem(cartAfterDelete);
-    }
-    onIncrement(_id){
-        this.props.updateCart(_id, 1);
-    }
-    onDecrement(_id){
-        if(quantity > 1) {
-            this.props.updateCart(_id, -1);
-        }
-      
-
-    }
-
     render(){
         if(this.props.cart[0]){
             return this.renderCart();
@@ -41,11 +15,41 @@ class Cart extends React.Component{
         }
     }
 
+   // renderEmpty(){
+    //    return(<div></div>)
+  //  }
 
 
-    renderEmpty(){
-        return(<div></div>)
-    }
+  //  onDelete(_id){
+           // Create a copy of the current array of books
+ //       const currentBookToDelete = this.props.cart;
+        // Determine at which index in books array is the book to be deleted
+    //    const indexToDelete = currentBookToDelete.findIndex(
+     //       function(cart){
+    //            return cart._id === _id;
+      //      }
+    //    ) 
+    // use slice to remove the book at the specified index    
+ //   let cartAfterDelete = [...currentBookToDelete.slice(0, indexToDelete), 
+   //  ...currentBookToDelete.slice(indexToDelete + 1)]    
+
+     //   this.props.deleteCartItem(cartAfterDelete);
+   // }
+   // onIncrement(_id){
+     //   this.props.updateCart(_id, 1);
+   // }
+   // onDecrement(_id){
+     //   if(quantity > 1) {
+       //     this.props.updateCart(_id, -1);
+       // }
+      
+
+   // }
+
+
+//    renderEmpty(){
+ //       return(<div></div>)
+  //  }
     
     renderCart(){
         const cartItemsList = this.props.cart.map(function(cartArr){
@@ -63,10 +67,10 @@ class Cart extends React.Component{
                         </Col>
                         <Col xs={6} sm={4}>
                         <ButtonGroup style={{minWidth: '300px'}}>
-                            <Button onClick={this.onDecrement.bind(this, cartArr._id, cartArr.quantity)} bsStyle="default" bsSize="small">-</Button>
-                            <Button onClick={this.onIncrement.bind(this, cartArr._id)} bsStyle="default" bsSize="small">+</Button>
+                            <Button bsStyle="default" bsSize="small">-</Button>
+                            <Button bsStyle="default" bsSize="small">+</Button>
                             <span>     </span>
-                            <Button onClick={this.onDelete.bind(this, cartArr._id)} bsStyle="danger" bsSize="small">DELETE</Button>
+                            <Button bsStyle="danger" bsSize="small">DELETE</Button>
                             </ButtonGroup>
                             </Col>
                     </Row>
